@@ -5,8 +5,8 @@ layui.define(["form","jquery"],function(exports){
 
     Layuiarea.prototype.provinces = function() {
         //加载省数据
-        var proHtml = '',that = this;
-        $.get("https://demo.duiniya.com/test2/area.php?type=0&id=0", function (data) {
+        var proHtml = '',that = this,url="https://demo.duiniya.com/test2/area.php";
+        $.get(url+"?type=0&id=0", function (data) {
 			
             var dataObj = eval(data);
 			var province_default = $("select[name=province]").attr("province_default");
@@ -25,7 +25,7 @@ layui.define(["form","jquery"],function(exports){
 			form.render();//更新  所在容器内的全部表单状态
 			//处理市默认值
 			if(province_default!="" && city_default!="" ){
-				$.get("https://demo.duiniya.com/test2/area.php?type=1&id="+province_default, function (data) {
+				$.get(url+"?type=1&id="+province_default, function (data) {
                         var ciHtml='';
                         var dataObj = eval(data);
                         $.each(dataObj,function(idx,item){
@@ -41,7 +41,7 @@ layui.define(["form","jquery"],function(exports){
                 });
 				if(area_default!=""){
 					//默认县/区
-					    $.get("https://demo.duiniya.com/test2/area.php?type=2&id="+city_default, function (data) {
+					    $.get(url+"?type=2&id="+city_default, function (data) {
                         var areaHtml='';
                         var dataObj = eval(data);
                         $.each(dataObj,function(idx,item){
@@ -61,7 +61,7 @@ layui.define(["form","jquery"],function(exports){
                 $("select[name=city]").html('<option value="">请选择市</option>');
                 var value = proData.value;
                 if (value > 0) {
-                    $.get("https://demo.duiniya.com/test2/area.php?type=1&id="+value, function (data) {
+                    $.get(url+"?type=1&id="+value, function (data) {
                         var ciHtml='';
                         var dataObj = eval(data);
                         $.each(dataObj,function(idx,item){
@@ -80,7 +80,7 @@ layui.define(["form","jquery"],function(exports){
                 $("select[name=area]").html('<option value="">请选择县/区</option>');
                 var value = cityData.value;
                 if (value > 0) {
-                    $.get("https://demo.duiniya.com/test2/area.php?type=2&id="+value, function (data) {
+                    $.get(url+"?type=2&id="+value, function (data) {
                         var areaHtml='';
                         var dataObj = eval(data);
                         $.each(dataObj,function(idx,item){
@@ -94,10 +94,6 @@ layui.define(["form","jquery"],function(exports){
                     $("select[name=area]").attr("disabled", "disabled");
                 }
             });
-
-
-
-
         })
     }
 
