@@ -40,6 +40,7 @@ layui.define(["form","jquery"],function(exports){
                         form.render();
                 });
 				if(area_default!=""){
+					//默认县/区
 					    $.get("https://demo.duiniya.com/test2/area.php?type=2&id="+city_default, function (data) {
                         var areaHtml='';
                         var dataObj = eval(data);
